@@ -15,7 +15,6 @@ const LoginComponent = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-   
 
 
     //verification if checkbox "signIUp" is checked, use local state

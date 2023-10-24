@@ -1,5 +1,5 @@
 import { login, signin } from "../instanceAxios";
-// import { Redirect } from "react-router-dom";
+
 
 export const getJWT = () => {
     const l_sessionStorage = sessionStorage.getItem('JWT');
@@ -10,6 +10,7 @@ export const getJWT = () => {
 }
 
 export const userLogin = async(FormData, isRemember) => {
+  
    try{
     const  {email, password} = FormData;
 
@@ -26,12 +27,9 @@ export const userLogin = async(FormData, isRemember) => {
             JSON.stringify(res.token)
         )
     }
-
     console.log("from userLogin",  res)
     return res;
-    
    }catch(err){
-       console.error(err);
        return err
    }
 };
@@ -42,13 +40,9 @@ export const userSignIn =  async(FormData) => {
         const  {email, password, firstName, lastName} = FormData;
         const res = await signin(email, password, firstName, lastName);
         console.log("from userSignIn",  res)
-        // if(res.status === 200){
-        //     <Redirect to="/login" /> 
-        // }
-        
-    
        }catch(err){
             console.error(err);
+            return err
             //move to state
        }
 }
