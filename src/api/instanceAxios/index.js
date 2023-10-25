@@ -52,10 +52,13 @@ export async function login(email, password) {
         email,
         password,
     });
+
     console.log('axios login', response)
     
-    return response.data;
+    return response;
 }
+
+
 export async function signin(email, password, firstName, lastName) {
     const response = await $api.post('/registration', {
         email,
@@ -63,7 +66,7 @@ export async function signin(email, password, firstName, lastName) {
         firstName, 
         lastName
     });
-    return response.data;
+    return response;
 }
   
 export async function getPassengers() {

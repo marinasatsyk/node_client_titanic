@@ -8,7 +8,8 @@ import {
     getUserFail,
 } from '../../../features/UserSlice';
 
-import  {userLogin} from '../../../api/userAPI';
+// import  {userLogin} from '../../../api/userAPI';
+import { login } from '../../../api/instanceAxios';
 
 const LoginComponent = () => {
   const { error } = useSelector((store) => store.user);
@@ -42,20 +43,36 @@ const LoginComponent = () => {
         event.preventDefault();
 
         //submit to API
-        //add verification of format!!!
         dispatch(getUserPending());
         console.log("***formData", formData);
         console.log("***formRequest", formRequest);
         try {
             console.log('in try ')
-            const isAuth = await userLogin(formRequest, isRemember);
-            console.log("isAuth", isAuth);
-            const user = isAuth.user;
+            const res = await login(formRequest.email, formRequest.password);
+
+            if( res.status === 200) {
+                if(isRemember){
+                    localStorage.setItem(
+                        'JWT',
+                        JSON.stringify(res.data.token)
+                    )
+                }else{
+                    sessionStorage.setItem(
+                        'JWT',
+                        JSON.stringify(res.data.token)
+                    ); 
+                }
+            } 
+
+            // const isAuth = await userLogin(formRequest, isRemember);
+            // console.log("isAuth", isAuth);
+            const user = res.data.user;
+
             user && dispatch(getUserSuccess(user));
             navigate('/user/profile');
+
         } catch (error) {
-            console.log('====>from handle submit');
-            console.error("**", error);
+            console.error("'====>from handle submit**", error);
             dispatch(getUserFail(error.message));
         }
     };
@@ -69,8 +86,10 @@ const LoginComponent = () => {
             <section className="sign-in-content">
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
+                
                 {error &&
-                    (error.includes('Password') || error.includes('User') ? (
+                // eslint-disable-next-line no-prototype-builtins
+                    (error.message !== "" ? (
                         <div className="error">{error}</div>
                     ) : null)}
 

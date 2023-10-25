@@ -35,14 +35,18 @@ export const userLogin = async(FormData, isRemember) => {
 };
 
 
-export const userSignIn =  async(FormData) => {
+export const userSignIn =  async(FormData, navigate) => {
     try{
         const  {email, password, firstName, lastName} = FormData;
         const res = await signin(email, password, firstName, lastName);
         console.log("from userSignIn",  res)
+        
+        if(res.data.status === 200){
+            navigate('/user/login');
+        }
+        return res;
        }catch(err){
-            console.error(err);
-            return err
-            //move to state
+            console.error("error", err);
+            
        }
 }

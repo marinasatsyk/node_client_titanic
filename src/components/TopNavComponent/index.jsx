@@ -63,7 +63,7 @@ export  const TopNavComponent = () => {
                     <img
                         className="main-nav-logo-image"
                         src="#"
-                        alt="Argent Bank Logo"
+                        alt="Titanic statistics Logo"
                     />
                     <h1 className="sr-only">Titanic statistics App</h1>
                 </div>
