@@ -27,6 +27,7 @@ function SignUpComponent() {
   const [isFirstNameValidate, setIsFirstNameIsValidate] = useState(false);
   const [isLastNameValidate, setIsLastNameIsValidate] = useState(false);
 
+  const [isSubmitRegister, setIsSubmitRegister] = useState(false);
   console.log("error", error);
 
   //verification of form data
@@ -36,6 +37,7 @@ function SignUpComponent() {
       setIsPasswordIsValidate(Validator.password(password));
       setIsFirstNameIsValidate(Validator.name(firstName));
       setIsLastNameIsValidate(Validator.name(lastName));
+      setIsSubmitRegister(true);
   };
 
   // post axios when everything is ok
@@ -45,9 +47,11 @@ function SignUpComponent() {
                 isEmailValidate &&
                 isPasswordValidate &&
                 isFirstNameValidate &&
-                isLastNameValidate
+                isLastNameValidate&&
+                isSubmitRegister
             ) {
                 // API new user
+                dispatch(getUserFail(''))
                 dispatch(getUserPending());
                 
                 try {
@@ -65,13 +69,14 @@ function SignUpComponent() {
                     }
                 } catch (error) {
                     console.log('from signUp submit', error);
+                    setIsSubmitRegister(false);
                      dispatch(getUserFail(error));
                 }
             }
         };
         newUser();
         // console.log('after useEffect ' + error);
-    }, [isEmailValidate, isPasswordValidate, isFirstNameValidate, isLastNameValidate, email, password, firstName, lastName]);
+    }, [isSubmitRegister,isEmailValidate, isPasswordValidate, isFirstNameValidate, isLastNameValidate, email, password, firstName, lastName]);
   
   
   
