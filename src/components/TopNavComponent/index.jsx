@@ -2,7 +2,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../features/UserSlice';
 // import { useEffect, useState } from 'react';
-
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+// eslint-disable-next-line no-unused-vars
+import{faShip, faCircleUser, faArrowRightFromBracket, faRightToBracket} from '@fortawesome/free-solid-svg-icons';
 import {
     // getUserPending,
     // getUserSuccess,
@@ -14,12 +16,12 @@ export  const TopNavComponent = () => {
     const { user } = useSelector((store) => store.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    function capitalizeFirstLetter(str) {
-        // converting first letter to uppercase
-        const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
+    // function capitalizeFirstLetter(str) {
+    //     // converting first letter to uppercase
+    //     const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
 
-        return capitalized;
-    }
+    //     return capitalized;
+    // }
 
     const signOut = () => {
         localStorage.removeItem('JWT');
@@ -55,54 +57,69 @@ export  const TopNavComponent = () => {
 
     return (
         <nav className="main-nav">
-            <Link to={!(user && user.id) ? '/' : '/user/profile'}>
-                <div
-                    className="main-nav-logo"
-                    onClick={() => dispatch(getUserFail(''))}
-                >
-                    <img
-                        className="main-nav-logo-image"
-                        src="#"
-                        alt="Titanic statistics Logo"
-                    />
-                    <h1 className="sr-only">Titanic statistics App</h1>
-                </div>
-            </Link>
+           {!(user && user.id) 
+           ? 
+           <>
+           <div
+           className="main-nav-logo"
+       >
+           <FontAwesomeIcon icon={faShip} /> 
+       </div>
+            <h1 className="title">Titanic statistics App</h1>
+           </>
+           
+           :<Link to= '/'>
+           <div
+               className="main-nav-logo"
+               title='home'
+               onClick={() => dispatch(getUserFail(''))}
+           >
+               <FontAwesomeIcon icon={faShip} /> 
+               
+              
+           </div>
+       </Link>
+           
+        }
+           
+            
             {!(user && user.id) ? (
                 <Link to="/user/login">
                     <div
                         className="main-nav-item"
                         onClick={() => dispatch(getUserFail(''))}
                     >
-                        <i className="fa fa-user-circle"></i>
-                        Sign In
+                   <FontAwesomeIcon icon={faCircleUser} title='LogIn'/> 
+                       
                     </div>
                 </Link>
             ) : (
                 <>
+                    
+                    
+                   
                     <div
+                        className="main-nav-item"
+                       
+                    >
+                        <div
                         className="main-nav-item"
                         onClick={() => {
                             viewProfile();
                         }}
+                        title='view profile'
                     >
-                        <i className="fa fa-user-circle"></i>
+                        <FontAwesomeIcon icon={faCircleUser} /> 
                     </div>
 
-                    <div
-                        className="main-nav-item"
-                        onClick={() => {
-                            signOut();
-                        }}
-                    >
-                        <div>
+                         {/* <div>
                             <i className="fa fa-user-circle"></i>
                             {capitalizeFirstLetter(user.firstName)}
-                        </div>
-
-                        <div>
-                            <i className="fa fa-sign-out"></i>
-                            Sign Out
+                        </div> */}
+                        <div  title='exit'  onClick={() => {
+                            signOut();
+                        }}>
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} rotation={270} />
                         </div>
                     </div>
                 </>

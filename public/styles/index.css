@@ -3,7 +3,7 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    /* color: #2c3e50; */
 }
 
 body {
@@ -18,6 +18,7 @@ body {
 
 .main {
     flex: 1;
+    position: relative;
 }
 
 .bg-dark {
@@ -46,11 +47,21 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 5px 20px;
+    background-color: #42b983;
+    color: white;
 }
 
+.fa-ship{
+    color: #42b983;
+}
+
+.fa-circle-user, .fa-arrow-right-from-bracket{
+    width: 50px;
+    height: 50px;
+}
 .main-nav a {
     font-weight: bold;
-    color: #2c3e50;
+    color: white;
 }
 
 .main-nav a.router-link-exact-active {
@@ -72,7 +83,13 @@ body {
 .main-nav-logo {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: white;
 }
+
 
 .main-nav-logo-image {
     max-width: 100%;
@@ -89,6 +106,8 @@ body {
     text-align: left;
     margin: 0 auto;
 }
+
+
 
 .hero-content .subtitle {
     font-weight: bold;
@@ -173,10 +192,15 @@ body {
     background-color: white;
     width: 300px;
     margin: 0 auto;
-    margin-top: 3rem;
     padding: 2rem;
-}
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    margin: 0;
 
+}
 .sign-in-icon {
     font-size: 5rem;
 }
