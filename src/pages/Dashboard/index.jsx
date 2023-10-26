@@ -8,11 +8,21 @@ import {StackedBarChart} from "../../components/charts/stacked_chart_age"
 import { SurvivedChart } from "../../components/charts/survived_chart"
 import { getPassengers } from "../../api/instanceAxios"
 import { ClassChart } from "../../components/charts/polar_class_chart"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import{faSpinner} from '@fortawesome/free-solid-svg-icons';
+// import Button from "react-bootstrap/Button";
+
 
 function DashboardComponent() {
 
-  const [isData, setIsData] = useState([])
+  const [isData, setIsData] = useState([]);
+  //variable for display differents statistics 
+  // eslint-disable-next-line no-unused-vars
+  const [sortBy, setSortBy] = useState('age');
+  const [isLoading, setIsLoading] = useState(false);
   
+  
+  //select range by select component 
   const ageRanges =  
   {ageRanges: [   {from: 0, to: 20},
     {from: 21, to: 40},
@@ -22,13 +32,30 @@ function DashboardComponent() {
     ]
   };
  
+  const handleSubmit = ( e) => {
+    
+    const target = e.target;
+    if (target.checked) {
+      setSortBy(target.value);
+    }
+    console.log("❤️❤️❤️❤️", sortBy);
+  }
+ 
+
   useEffect(() => {
    try{
      const data = async() => {
+      setIsData(true)
        const res = await getPassengers(ageRanges);
       if(res.status === 200){
         setIsData(res.data)
+
       }
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
+      
+      
    }
    data()
    }catch(err){
@@ -38,14 +65,46 @@ function DashboardComponent() {
   }, [])
 
 
+  console.log("sortBy", sortBy)
+if(isLoading){
+  return(
+    <div className="app-main-container">
+    <h1>Titanic Statistics Page</h1>
+    <article className="bar-charts">
+        <header className="header-barchart-article">
+          Statistics by Age
+        </header>
+        <div className="loading-container"><FontAwesomeIcon icon={faSpinner} spin />...Loading</div>
+    </article>
+    </div>
+  )
+}else{
   return (
-    <div className="App">
+    <div className="app-main-container">
         <h1>Titanic Statistics Page</h1>
         <article className="bar-charts">
             <header className="header-barchart-article">
-              Statistics by Age
+
+
+              Statistics 
+              <form className="form-control" onSubmit={handleSubmit}>
+                <div>
+                  <label>
+                    <input type="radio" value="age" checked={sortBy == 'age'}   onChange={(e)=>handleSubmit(e)}/>
+                    <span>Age</span>
+                  </label>
+                  <label>
+                    <input type="radio" value="gender" checked={sortBy == 'gender'}  onChange={(e)=>handleSubmit(e)}/>
+                    <span>Gender</span>
+                  </label>
+                  <label>
+                    <input type="radio" value="class" checked={sortBy == 'class'}  onChange={(e)=>handleSubmit(e)} />
+                    <span>Class</span>
+                  </label>
+                </div>
+            </form>
             </header>
-             <div className="wrap-all-charts">
+              <div className="wrap-all-charts">
              
               <section>
 
@@ -62,7 +121,7 @@ function DashboardComponent() {
 
               <div className="container-genre-stat">
               {isData.length &&  isData.map((rangeP, index) => {
-                    return (
+                return (
                   <section key={index+`-age`}>
                     <div className="wrap-chart">
                       <h3>Statistic by gender</h3>
@@ -70,7 +129,8 @@ function DashboardComponent() {
                     </div>
                   </section>
                     )
-                })}
+              })
+            }              
               </div>
               <div className="container-genre-stat container-class-stat">
               {isData.length &&  isData.map((rangeP, index) => {
@@ -86,11 +146,18 @@ function DashboardComponent() {
                     )
                 })}
               </div>
-              
             </div> 
+            
+             
+             
+           
         </article>
     </div>
   )
+}
+
+
+ 
 }
 
 export default DashboardComponent

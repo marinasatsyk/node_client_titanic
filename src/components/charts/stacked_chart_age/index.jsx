@@ -116,8 +116,8 @@ export const  StackedBarChart = ({dataP}) =>  {
                 <Bar 
                     options={options}
                     data={data} 
-                    width={500}
-                    height={400}
+                    width={400}
+                    height={300}
                 />
             </div>
     </section>

@@ -13,20 +13,25 @@ import { Navigate } from "react-router-dom";
 export default function App() {
   const { user } = useSelector((store) => store.user);
     const id = user.id;
+    const sessionClientToken = JSON.parse(window.sessionStorage.getItem('JWT')) ;
+    const localclientToken = JSON.parse(window.localStorage.getItem('JWT'));
+
+    const clientToken = sessionClientToken ? sessionClientToken : localclientToken;
+
     console.log('from app', id);
   return (
     <BrowserRouter>
        <TopNavComponent/> 
       <Routes>
           <Route  path="/" element={
-                  id 
+                  clientToken 
                   ? <Navigate to="/user/profile" replace={true} />
                   : <Navigate to="/user/login" replace={true} />
                 } />
 
           <Route path="/user/login"  
             element={
-                  <RedirectRoute id={id} path={'/user/profile'}>
+                  <RedirectRoute clientToken={clientToken} path={'/user/profile'}>
                     <LoginComponent />
                   </RedirectRoute>
                   } 
@@ -34,14 +39,14 @@ export default function App() {
 
           <Route path="/user/signup" 
                 element={
-                  <RedirectRoute id={id} path={'/user/profile'}>
+                  <RedirectRoute clientToken={clientToken} path={'/user/profile'}>
                 <SignUpComponent />
                 </RedirectRoute>
               } 
             />
           <Route index  path="/user/profile"
                     element={
-                        <Protected id={id}>
+                        <Protected clientToken={clientToken}>
                             <DashboardComponent />
                         </Protected>
                     }/>

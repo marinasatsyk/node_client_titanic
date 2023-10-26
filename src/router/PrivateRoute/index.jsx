@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import { Navigate } from 'react-router';
 
-const RedirectRoute = ({ id, path, children  }) => {
-    if (id) {
+const RedirectRoute = ({ clientToken, path, children  }) => {
+    if (clientToken) {
         return <Navigate to={path} replace />;
     }
     return children;

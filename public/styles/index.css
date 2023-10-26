@@ -378,6 +378,10 @@ body {
     color: #cad3db;
 }
 
+.bar-charts{
+    margin-left: 20px;
+    margin-right: 20px;
+}
 .error {
     font-size: 10px;
     color: red;
@@ -393,10 +397,49 @@ body {
    
 }
 
+.wrap-chart{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.fa-spinner{
+    font-size: 40px;
+    color: #12002b;
+}
 
-/* .wrap-all-charts section{
-    max-height: 350px;
+/* btn radio  */
+/* :root {
+    --form-control-color: rebeccapurple;
+  }
+*,
+*:before,
+*:after {
+box-sizing: border-box;
+}
+input[type='radio'] {
+    -webkit-appearance:none;
+    width:50px;
+    height:20px;
+    border-radius:5px;
+    outline:none;
+}
+input[type='radio']:hover {
+    box-shadow:0 0 5px 0px rgb(0, 14, 30) inset;
+}
+input[type='radio']:before {
+    content:'';
+    display:block;
+    width:100%;
+    height:100%;
+    /* margin: 20% auto;     
+     border-radius:5px;     
+}
+input[type='radio']:checked:before {
+    background:rgba(128, 128, 128, 0.422);
 } */
+
 /* tablets */
 @media only screen and (min-width: 48em) {
     .wrap-all-charts, .container-genre-stat{
