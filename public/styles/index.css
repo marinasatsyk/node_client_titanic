@@ -384,20 +384,28 @@ body {
 }
 
 /* charts */
-.wrap-all-charts{
+.wrap-all-charts, .container-genre-stat{
     display: flex;
     flex-direction:  column;
     justify-content: space-evenly;
     gap: 20px;
     
+   
 }
+
+
 /* .wrap-all-charts section{
     max-height: 350px;
 } */
 /* tablets */
 @media only screen and (min-width: 48em) {
-    .wrap-all-charts{
+    .wrap-all-charts, .container-genre-stat{
         flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .chart-wrapper{
+        max-width: 300px;
+        max-height: 300px;
     }
         
 }

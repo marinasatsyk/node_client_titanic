@@ -1,56 +1,24 @@
+/* eslint-disable react/prop-types */
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { getPassengers } from '../../../api/instanceAxios';
-import { useEffect } from 'react';
-import { useState } from 'react';
-// import { useEffect } from 'react';
-
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const ageRanges =  
-    //@todo for implement select of ranges
-    {ageRanges: [   {from: 0, to: 20},
-                    {from: 21, to: 40},
-                    {from: 41, to: 60},
-                    {from: 61},
-                    {from: undefined, to:undefined}
-                  ]
-     };
- 
-
-export const AgeChart = () => {
-  const [isData, setIsData] = useState([])
-  
-     useEffect(() => {
-      try{
-        const data = async() => {
-          const res = await getPassengers(ageRanges);
-         //  console.log(res.data)
-         if(res.status === 200){
-           setIsData(res.data)
-         }
-      }
-      data()
-      }catch(err){
-        console.log("from age chart", err)
-      }
+export const AgeChart = ({data}) => {
 
 
-     }, [])
-
-
-     
+    const isData = data;
+    console.log("from isData",isData)
     const chartArray = [];
+   
     isData.length &&
-      isData.forEach((rangeData) => {
-          chartArray.push({
+    isData.forEach((rangeData) => {
+         chartArray.push({
             range: (rangeData.from || rangeData.to) ?  `${rangeData.from ? `from ${rangeData.from}` : ""} ${rangeData.to ? `to ${rangeData.to}`: "" } ` : `Age is not defined`,
             total: rangeData.pData.length
           })
         });
 
       console.log("chartArray", chartArray)
-        
 
 
 
@@ -78,7 +46,6 @@ export const AgeChart = () => {
           },
         ],
       };
-
 
     return(
         <section>

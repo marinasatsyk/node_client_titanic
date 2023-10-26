@@ -10,8 +10,6 @@ import {
   } from 'chart.js';
 
   import { Bar } from 'react-chartjs-2';
-import { useEffect, useState } from 'react';
-import { getPassengers } from '../../../api/instanceAxios';
 
     ChartJS.register(
     CategoryScale,
@@ -22,7 +20,8 @@ import { getPassengers } from '../../../api/instanceAxios';
     Legend
   );
 
-//**** */
+
+
 export const options = {
     plugins: {
       title: {
@@ -48,42 +47,15 @@ export const options = {
 };
   
 
-//**** */
-const ageRanges =  
-    //@todo for implement select of ranges
-    {ageRanges: [   {from: 0, to: 20},
-                    {from: 21, to: 40},
-                    {from: 41, to: 60},
-                    {from: 61},
-                    {from: undefined, to:undefined}
-                  ]
-     };
-
-export const  StackedBarChart = () =>  {
-    const [isData, setIsData] = useState([])
-  
-    useEffect(() => {
-     try{
-       const data = async() => {
-         const res = await getPassengers(ageRanges);
-        //  console.log(res.data)
-        if(res.status === 200){
-          setIsData(res.data)
-        }
-     }
-     data()
-     }catch(err){
-       console.log("from age chart", err)
-     }
-
-
-    }, [])
-
-
-    
+// eslint-disable-next-line react/prop-types
+export const  StackedBarChart = ({dataP}) =>  {
+   
    const chartArray = [];
-   isData.length &&
-     isData.forEach((rangeData) => {
+   const dataPassengers = dataP;
+   console.log("from isData",dataPassengers)
+
+   dataPassengers.length &&
+   dataPassengers.forEach((rangeData) => {
          chartArray.push({
            range: (rangeData.from || rangeData.to) ?  `${rangeData.from ? `from ${rangeData.from}` : ""} ${rangeData.to ? `to ${rangeData.to}`: "" } ` : `Age is not defined`,
            total: rangeData.pData.length
@@ -106,7 +78,7 @@ export const  StackedBarChart = () =>  {
           },
           {
             label: 'Survived',
-            data: isData.map((range) =>{
+            data: dataPassengers.map((range) =>{
                  let count = 0;
                  range.pData.forEach((passenger) => {
                     if(+passenger.Survived == 1 ){
@@ -122,7 +94,7 @@ export const  StackedBarChart = () =>  {
           },
           {
             label: 'Victims',
-            data: isData.map((range) =>{
+            data: dataPassengers.map((range) =>{
                 let count = 0;
                 range.pData.forEach((passenger) => {
                    if(+passenger.Survived == 0 ){
@@ -144,8 +116,8 @@ export const  StackedBarChart = () =>  {
                 <Bar 
                     options={options}
                     data={data} 
-                    width={300}
-                    height={300}
+                    width={500}
+                    height={400}
                 />
             </div>
     </section>

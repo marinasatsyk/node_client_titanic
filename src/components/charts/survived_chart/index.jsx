@@ -1,31 +1,46 @@
+/* eslint-disable react/prop-types */
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
  
 
-export const SurvivedChart = () =>  {
-    const data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+export const SurvivedChart = ({rangeP}) =>  {
+  const isData = rangeP;
+  console.log("from isData",isData)
+  let rangeLabel  = '';
+  let totalWomen = 0;
+  let totalMen = 0;
+ 
+ if(Object.keys(isData).length)  {
+  rangeLabel = (isData.from || isData.to) 
+  ?  `${isData.from ? `from ${isData.from}` : ""} ${isData.to ? `to ${isData.to}`: "" } ` 
+  : `Age is not defined`;
+  isData.pData.forEach((passenger)  => {
+    if(passenger.Sex == 'female'){
+      totalWomen = totalWomen+1;
+    }else if(passenger.Sex == "male"){
+      totalMen = totalMen + 1;
+    }
+  })
+}
+
+
+ 
+  console.log("chartArray", totalWomen, totalWomen)
+  const dataChart = {
+        labels: [ 'Women', 'Men'],
         datasets: [
           {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: rangeLabel,
+            data: [totalWomen, totalMen],
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
             ],
             borderColor: [
               'rgba(255, 99, 132, 1)',
               'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
             ],
             borderWidth: 1,
           },
@@ -36,10 +51,20 @@ export const SurvivedChart = () =>  {
         <section>
             <div className="wrap-chart"> 
                 <Pie 
-                data={data} 
-                width={300}
-                height={300}
-                options={{ maintainAspectRatio: false }}
+                data={dataChart} 
+                width={200}
+                height={200}
+                options={{ 
+                  maintainAspectRatio: false ,
+                  responsive: true,
+                  plugins: {
+                    title: {
+                      display: true,
+                      fontSize: 25, 
+                      text: rangeLabel
+                    } 
+                  },
+                }}
                 />
             </div>
         </section>
