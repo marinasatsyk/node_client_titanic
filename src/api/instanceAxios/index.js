@@ -18,8 +18,8 @@ const $api = axios.create({
 
 
   $api.interceptors.request.use((config) => {
-    const sessionClientToken = window.sessionStorage.getItem('JWT');
-    const localclientToken = window.sessionStorage.getItem('JWT');
+    const sessionClientToken = JSON.parse(window.sessionStorage.getItem('JWT')) ;
+    const localclientToken = JSON.parse(window.localStorage.getItem('JWT'));
 
     const clientToken = sessionClientToken ? sessionClientToken : localclientToken;
     console.log(clientToken)
@@ -69,7 +69,7 @@ export async function signin(email, password, firstName, lastName) {
     return response;
 }
   
-export async function getPassengers() {
-    const response = await $api.get('/passengers');
-    return response.data;
+export async function getPassengers(data) {
+    const response = await $api.post('/passengers', data);
+    return response;
 }

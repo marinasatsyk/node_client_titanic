@@ -382,3 +382,32 @@ body {
     font-size: 10px;
     color: red;
 }
+
+/* charts */
+.wrap-all-charts{
+    display: flex;
+    flex-direction:  column;
+    justify-content: space-evenly;
+    gap: 20px;
+    
+}
+/* .wrap-all-charts section{
+    max-height: 350px;
+} */
+/* tablets */
+@media only screen and (min-width: 48em) {
+    .wrap-all-charts{
+        flex-direction: row;
+    }
+        
+}
+
+/* Large devices such as laptops (1024px and up) */
+@media only screen and (min-width: 64em) {
+
+}
+
+/* Largest devices such as desktops (1280px and up) */
+@media only screen and (min-width: 80em) {
+
+}
