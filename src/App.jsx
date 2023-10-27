@@ -2,13 +2,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginComponent from "./pages/AuthForm/Login";
 import DashboardComponent from "./pages/Dashboard";
 import NotFoundComponent from "./pages/404";
-//  import LayoutComponent from "./pages/Layout";
 import Protected from "./router/ProtectedRoute";
  import {TopNavComponent} from "./components/TopNavComponent";
 import SignUpComponent from "./pages/AuthForm/SignUp";
+import ProfilComponent from "./pages/Profil";
 import { useSelector } from 'react-redux';
 import RedirectRoute from "./router/PrivateRoute";
 import { Navigate } from "react-router-dom";
+import UpdateUserFormComponent from "./components/updateUserForm";
 
 export default function App() {
   const { user } = useSelector((store) => store.user);
@@ -51,10 +52,20 @@ export default function App() {
                         </Protected>
                     }/>
 
+          <Route exact path="/user/profile/:id" element={
+                        <Protected clientToken={clientToken}>
+                            <ProfilComponent />
+                        </Protected>
+                    }/>
+          <Route exact path="/user/profile/:id/edit" element={
+                        <Protected clientToken={clientToken}>
+                            <UpdateUserFormComponent />
+                        </Protected>
+                    }/>
+
             <Route path="*" element={<NotFoundComponent codeError="404" />} />
        </Routes>
     </BrowserRouter>
-    
     
   );
 }

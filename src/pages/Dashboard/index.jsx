@@ -1,17 +1,14 @@
-// eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react"
-// eslint-disable-next-line no-unused-vars
 import { AgeChart } from "../../components/charts/age_chart"
-// eslint-disable-next-line no-unused-vars
 import {StackedBarChart} from "../../components/charts/stacked_chart_age"
-// eslint-disable-next-line no-unused-vars
 import { SurvivedChart } from "../../components/charts/survived_chart"
 import { getPassengers } from "../../api/instanceAxios"
 import { ClassChart } from "../../components/charts/polar_class_chart"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import{faSpinner} from '@fortawesome/free-solid-svg-icons';
-// import Button from "react-bootstrap/Button";
-
+//  import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+// import ButtonToolbar from "react-bootstrap/ButtonGroup";
+// import ToggleButton  from "react-bootstrap/ToggleButton";
 
 function DashboardComponent() {
 
@@ -32,20 +29,18 @@ function DashboardComponent() {
     ]
   };
  
-  const handleSubmit = ( e) => {
-    
-    const target = e.target;
-    if (target.checked) {
-      setSortBy(target.value);
-    }
-    console.log("❤️❤️❤️❤️", sortBy);
-  }
+  // const handleChange = ( e) => {
+  //   const target = e.target;
+  //   if (target.checked) {
+  //     setSortBy(target.value);
+  //   }
+  //   console.log(, sortBy);
+  // }
  
-
   useEffect(() => {
    try{
      const data = async() => {
-      setIsData(true)
+      setIsLoading(true)
        const res = await getPassengers(ageRanges);
       if(res.status === 200){
         setIsData(res.data)
@@ -69,13 +64,7 @@ function DashboardComponent() {
 if(isLoading){
   return(
     <div className="app-main-container">
-    <h1>Titanic Statistics Page</h1>
-    <article className="bar-charts">
-        <header className="header-barchart-article">
-          Statistics by Age
-        </header>
-        <div className="loading-container"><FontAwesomeIcon icon={faSpinner} spin />...Loading</div>
-    </article>
+            <div className="loading-container"><FontAwesomeIcon icon={faSpinner} spin />...Loading</div>
     </div>
   )
 }else{
@@ -84,25 +73,17 @@ if(isLoading){
         <h1>Titanic Statistics Page</h1>
         <article className="bar-charts">
             <header className="header-barchart-article">
-
-
               Statistics 
-              <form className="form-control" onSubmit={handleSubmit}>
-                <div>
-                  <label>
-                    <input type="radio" value="age" checked={sortBy == 'age'}   onChange={(e)=>handleSubmit(e)}/>
-                    <span>Age</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="gender" checked={sortBy == 'gender'}  onChange={(e)=>handleSubmit(e)}/>
-                    <span>Gender</span>
-                  </label>
-                  <label>
-                    <input type="radio" value="class" checked={sortBy == 'class'}  onChange={(e)=>handleSubmit(e)} />
-                    <span>Class</span>
-                  </label>
-                </div>
-            </form>
+
+              {/* change active sate of user's choice for  display data
+              <ButtonToolbar>
+                <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+                  <ToggleButton value={1}>Age (by default)</ToggleButton>
+                  <ToggleButton value={2}>Gendre</ToggleButton>
+                  <ToggleButton value={3}>Class</ToggleButton>
+                </ToggleButtonGroup>
+              </ButtonToolbar> */}
+                
             </header>
               <div className="wrap-all-charts">
              

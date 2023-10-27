@@ -16,13 +16,7 @@ export  const TopNavComponent = () => {
     const { user } = useSelector((store) => store.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    // function capitalizeFirstLetter(str) {
-    //     // converting first letter to uppercase
-    //     const capitalized = str.charAt(0).toUpperCase() + str.slice(1);
-
-    //     return capitalized;
-    // }
-
+console.log('❤️❤️❤️❤️', user)
     const signOut = () => {
         localStorage.removeItem('JWT');
         sessionStorage.removeItem('JWT');
@@ -31,29 +25,9 @@ export  const TopNavComponent = () => {
     };
 
     const viewProfile = () => {
-        navigate('/user/profile');
+        navigate(`/user/profile/${user.id}`);
     };
 
-    //autoconnetion for case "remember me"
-    // const [logged, setLogged] = useState(false);
-    // if(user){
-    //   setLogged(true)
-
-    // }
-    // useEffect(() => {
-    //     dispatch(getUserPending());
-    //     fetchUser()
-    //         .then((userData) => {
-    //             console.log('CONNECT !!!');
-    //             setLogged(true);
-    //             dispatch(getUserSuccess(userData.body));
-    //             navigate('/user/profile');
-    //         })
-    //         .catch((err) => {
-    //             console.log('not connected');
-    //             dispatch(getUserFail(err));
-    //         });
-    // }, [logged]);
 
     return (
         <nav className="main-nav">
@@ -112,10 +86,7 @@ export  const TopNavComponent = () => {
                         <FontAwesomeIcon icon={faCircleUser} /> 
                     </div>
 
-                         {/* <div>
-                            <i className="fa fa-user-circle"></i>
-                            {capitalizeFirstLetter(user.firstName)}
-                        </div> */}
+                         
                         <div  title='exit'  onClick={() => {
                             signOut();
                         }}>

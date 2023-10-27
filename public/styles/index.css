@@ -186,6 +186,18 @@ body {
     color: #fff;
 }
 
+.sign-up-button.cancel {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-color: #bc2200;
+    background-color: #bc2200;
+    color: #fff;
+}
+
 .sign-in-content,
 .sign-up-content {
     box-sizing: border-box;
@@ -397,7 +409,7 @@ body {
    
 }
 
-.wrap-chart{
+.wrap-chart, .profil-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -406,9 +418,25 @@ body {
 }
 .fa-spinner{
     font-size: 40px;
-    color: #12002b;
+    color: #12002b40;
+}
+.loading-container{
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+button.update-btn{
+    width: 200px;
+    height: 50px;
+}
 /* btn radio  */
 /* :root {
     --form-control-color: rebeccapurple;

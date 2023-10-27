@@ -57,6 +57,11 @@ export async function login(email, password) {
     
     return response;
 }
+export async function getUser(id) {
+    const response = await $api.post(`/user/${id}`);
+    console.log('axios login', response)
+    return response;
+}
 
 
 export async function signin(email, password, firstName, lastName) {
@@ -66,6 +71,11 @@ export async function signin(email, password, firstName, lastName) {
         firstName, 
         lastName
     });
+    return response;
+}
+
+export async function update(userId, dataToUpdate) {
+    const response = await $api.post(`/user/${userId}`, dataToUpdate);
     return response;
 }
   
