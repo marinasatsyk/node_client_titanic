@@ -57,14 +57,12 @@ function UpdateUserFormComponent() {
                   navigate('/user/login')
                 }
             } catch (error) {
-                console.log('from signUp submit', error);
                 setIsSubmitRegister(false);
                  dispatch(getUserFail(error));
             }
         }
     };
     newUser();
-    // console.log('after useEffect ' + error);
 }, [isSubmitRegister,isEmailValidate, isFirstNameValidate, isLastNameValidate, email, firstName, lastName]);
 
   return (

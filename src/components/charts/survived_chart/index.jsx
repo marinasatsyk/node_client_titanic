@@ -7,7 +7,6 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const SurvivedChart = ({rangeP}) =>  {
   const isData = rangeP;
-  console.log("from isData",isData)
   let rangeLabel  = '';
   let totalWomen = 0;
   let totalMen = 0;
@@ -27,7 +26,6 @@ export const SurvivedChart = ({rangeP}) =>  {
 
 
  
-  console.log("chartArray", totalWomen, totalWomen)
   const dataChart = {
         labels: [ 'Women', 'Men'],
         datasets: [

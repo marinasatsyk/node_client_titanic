@@ -27,7 +27,6 @@ export const userLogin = async(FormData, isRemember) => {
             JSON.stringify(res.token)
         )
     }
-    console.log("from userLogin",  res)
     return res;
    }catch(err){
        return err
@@ -39,7 +38,6 @@ export const userSignIn =  async(FormData, navigate) => {
     try{
         const  {email, password, firstName, lastName} = FormData;
         const res = await signin(email, password, firstName, lastName);
-        console.log("from userSignIn",  res)
         
         if(res.data.status === 200){
             navigate('/user/login');

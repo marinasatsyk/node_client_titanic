@@ -19,7 +19,6 @@ export default function App() {
 
     const clientToken = sessionClientToken ? sessionClientToken : localclientToken;
 
-    console.log('from app', id);
   return (
     <BrowserRouter>
        <TopNavComponent/> 

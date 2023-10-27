@@ -44,10 +44,7 @@ const LoginComponent = () => {
 
         //submit to API
         dispatch(getUserPending());
-        console.log("***formData", formData);
-        console.log("***formRequest", formRequest);
         try {
-            console.log('in try ')
             const res = await login(formRequest.email, formRequest.password);
 
             if( res.status === 200) {
@@ -64,8 +61,6 @@ const LoginComponent = () => {
                 }
             } 
 
-            // const isAuth = await userLogin(formRequest, isRemember);
-            // console.log("isAuth", isAuth);
             const user = res.data.user;
 
             user && dispatch(getUserSuccess(user));

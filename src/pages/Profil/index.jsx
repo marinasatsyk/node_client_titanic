@@ -11,7 +11,6 @@ export default function ProfilComponent () {
   const { user } = useSelector((store) => store.user);
   const navigate = useNavigate();
 
-  console.log(isEdit)
   
   const editProfile = () => {
     navigate(`/user/profile/${user.id}/edit`);

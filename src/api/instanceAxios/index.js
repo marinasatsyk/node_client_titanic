@@ -7,7 +7,6 @@ import axios from 'axios';
  const API_URL = `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${REACT_APP_MAIN_API_ROUTE}`;
 
 // eslint-disable-next-line no-undef
-console.log(`${API_URL}`)
 
 const $api = axios.create({
     baseURL: API_URL,
@@ -22,20 +21,18 @@ const $api = axios.create({
     const localclientToken = JSON.parse(window.localStorage.getItem('JWT'));
 
     const clientToken = sessionClientToken ? sessionClientToken : localclientToken;
-    console.log(clientToken)
     if (clientToken) {
       config.headers.Authorization = `Bearer ${clientToken}`;
     }
-    console.log(clientToken)
     return config;
   });  
 
   $api.interceptors.response.use(
     (config) => config,
     (error) => {
-      console.log('from asios instance', error.message)
-      if (error.response.data) return Promise.reject(error.response.data);
-  
+      if (error.response.data) {
+         return Promise.reject(error.response.data)
+    }
       return Promise.reject(error);
     }
 );
@@ -53,13 +50,12 @@ export async function login(email, password) {
         password,
     });
 
-    console.log('axios login', response)
     
     return response;
 }
 export async function getUser(id) {
-    const response = await $api.post(`/user/${id}`);
-    console.log('axios login', response)
+    const response = await $api.get(`/user/${id}`);
+
     return response;
 }
 

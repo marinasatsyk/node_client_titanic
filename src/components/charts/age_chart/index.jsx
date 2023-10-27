@@ -7,7 +7,6 @@ export const AgeChart = ({data}) => {
 
 
     const isData = data;
-    console.log("from isData",isData)
     const chartArray = [];
    
     isData.length &&
@@ -17,9 +16,6 @@ export const AgeChart = ({data}) => {
             total: rangeData.pData.length
           })
         });
-
-      console.log("chartArray", chartArray)
-
 
 
     const dataChart = {

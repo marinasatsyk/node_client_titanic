@@ -60,7 +60,6 @@ function DashboardComponent() {
   }, [])
 
 
-  console.log("sortBy", sortBy)
 if(isLoading){
   return(
     <div className="app-main-container">

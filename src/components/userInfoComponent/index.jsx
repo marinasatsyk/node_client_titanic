@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../../api/instanceAxios";
+import { getUserFail } from "../../features/UserSlice";
 
 // eslint-disable-next-line react/prop-types
 function UserInfoComponent() {
     const [dataUser, setDataUser] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const { user } = useSelector((store) => store.user);
+    const dispatch  = useDispatch();
     
     useEffect(() => {
       try{
@@ -22,11 +24,11 @@ function UserInfoComponent() {
       }
         data()
       }catch(err){
-        console.log("from dashboard", err)
+        console.log("err ****************from userInfocomponent", err)
+        dispatch(getUserFail(err));
       }
       }, [])
 
-console.log(isLoading)
 
   return (
     <div className="profil-container">

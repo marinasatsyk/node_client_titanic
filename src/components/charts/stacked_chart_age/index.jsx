@@ -52,7 +52,6 @@ export const  StackedBarChart = ({dataP}) =>  {
    
    const chartArray = [];
    const dataPassengers = dataP;
-   console.log("from isData",dataPassengers)
 
    dataPassengers.length &&
    dataPassengers.forEach((rangeData) => {
@@ -62,7 +61,6 @@ export const  StackedBarChart = ({dataP}) =>  {
          })
        });
 
-     console.log("chartArray", chartArray)
        
 
      const labels = chartArray.map(range =>  range.range);
@@ -85,7 +83,6 @@ export const  StackedBarChart = ({dataP}) =>  {
                         count = count +1;
                     }
                  })
-                 console.log("Survived", count)
                  return count;
                 }),
             backgroundColor: 'rgb(75, 192, 192)',

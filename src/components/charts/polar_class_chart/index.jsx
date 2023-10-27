@@ -13,7 +13,6 @@ ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 export const ClassChart =({rangeP}) =>  {
   // eslint-disable-next-line no-unused-vars
   const isData = rangeP;
-  console.log("from isData",isData)
   let rangeLabel  = '';
   let totalFirstClass = 0;
   let totalSecondClass = 0;

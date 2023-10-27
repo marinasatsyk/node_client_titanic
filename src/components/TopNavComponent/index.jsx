@@ -16,7 +16,6 @@ export  const TopNavComponent = () => {
     const { user } = useSelector((store) => store.user);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-console.log('❤️❤️❤️❤️', user)
     const signOut = () => {
         localStorage.removeItem('JWT');
         sessionStorage.removeItem('JWT');
