@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ProfilComponent () {
   const [isEdit, setIsEdit]= useState(false);
-  const { user } = useSelector((store) => store.user);
+  const { user, error } = useSelector((store) => store.user);
   const navigate = useNavigate();
 
   
@@ -20,7 +20,7 @@ export default function ProfilComponent () {
     return (
       <div className="profil-container">
       <UserInfoComponent  /> 
-        <button className="update-btn" onClick={() => editProfile()}>Update</button>
+       {!error.message &&<button className="update-btn" onClick={() => editProfile()}>Update</button>} 
       </div>
       
       )

@@ -54,9 +54,9 @@ export async function login(email, password) {
     return response;
 }
 export async function getUser(id) {
-    const response = await $api.get(`/user/${id}`);
-
-    return response;
+       const response = await $api.get(`/user/${id}`);
+       return response;
+    
 }
 
 
